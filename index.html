@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorteio Dia das Mães - Prefeitura de João Lisboa</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="bg-white shadow-md py-4 px-6 sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img
+            src="./assets/img/logo.png"
+            alt="Logo"
+            class="h-20 w-28 rounded-lg object-cover shadow-lg"
+          />
+          <div>
+            <h1 class="text-2xl font-bold text-gray-800">Sorteio Dia das Mães</h1>
+            <p class="text-xs text-gray-500">
+              Prefeitura de João Lisboa - MA
+            </p>
+          </div>
+        </div>
+        <nav class="hidden md:flex gap-6">
+          <a
+            href="#sorteio"
+            class="text-gray-600 hover:text-pink-600 font-medium transition"
+            >Sorteio</a
+          >
+          <a
+            href="#historico"
+            class="text-gray-600 hover:text-pink-600 font-medium transition"
+            >Histórico</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="min-h-screen flex items-center justify-center p-4 md:p-6">
+      <div class="w-full max-w-3xl">
+        <!-- CARD PRINCIPAL -->
+        <div
+          id="sorteio"
+          class="glass-effect rounded-3xl shadow-2xl p-8 md:p-12 mb-8"
+        >
+          <div class="flex items-center justify-center gap-3 mb-8">
+            <div class="icon-box p-4 rounded-2xl">
+              <i class="fas fa-gift text-3xl text-pink-600"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-black text-gray-800">
+              Sorteio - Dia das Mães
+            </h2>
+          </div>
+
+          <p class="text-center text-gray-600 mb-8 text-lg">
+            Sistema oficial de sorteio da Prefeitura de João Lisboa - MA
+          </p>
+
+          <!-- CAMPOS -->
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="relative">
+              <label
+                class="block text-gray-700 font-semibold mb-3 flex items-center gap-2"
+              >
+                <i class="fas fa-arrow-down text-pink-600"></i>
+                Número Inicial
+              </label>
+              <input
+                type="number"
+                id="inicio"
+                placeholder="Ex: 1"
+                class="w-full border-2 border-gray-200 rounded-xl p-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition"
+              />
+            </div>
+
+            <div class="relative">
+              <label
+                class="block text-gray-700 font-semibold mb-3 flex items-center gap-2"
+              >
+                <i class="fas fa-arrow-up text-pink-600"></i>
+                Número Final
+              </label>
+              <input
+                type="number"
+                id="fim"
+                placeholder="Ex: 100"
+                class="w-full border-2 border-gray-200 rounded-xl p-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition"
+              />
+            </div>
+          </div>
+
+          <!-- BOTÃO -->
+          <button
+            onclick="sortearNumero()"
+            class="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white font-bold text-lg py-4 rounded-2xl shadow-lg flex items-center justify-center gap-3 transition transform hover:scale-105"
+          >
+            <i class="fas fa-heart"></i>
+            Sortear Número
+          </button>
+
+          <!-- RESULTADO -->
+          <div class="mt-10 text-center">
+            <p
+              class="text-gray-500 mb-4 text-sm uppercase tracking-wider font-semibold"
+            >
+              <i class="fas fa-heart text-pink-500 mr-2"></i>Número Sorteado
+            </p>
+
+            <div
+              id="resultado"
+              class="text-8xl md:text-9xl font-black bg-gradient-to-r from-pink-500 to-pink-700 bg-clip-text text-transparent mb-4"
+            >
+              -
+            </div>
+
+            <p class="text-gray-600 text-sm">Aguardando sorteio...</p>
+          </div>
+        </div>
+
+        <!-- CARD HISTÓRICO -->
+        <div
+          id="historico-section"
+          class="glass-effect rounded-3xl shadow-2xl p-8 md:p-12"
+        >
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <div class="bg-gradient-to-br from-pink-100 to-pink-50 p-3 rounded-xl">
+                <i class="fas fa-list text-2xl text-pink-600"></i>
+              </div>
+              <h2 class="text-3xl font-bold text-gray-800">
+                Números Sorteados
+              </h2>
+            </div>
+
+            <button
+              onclick="limparHistorico()"
+              class="bg-red-500 hover:bg-red-600 text-white px-5 py-3 rounded-xl font-semibold flex items-center gap-2 transition transform hover:scale-105"
+            >
+              <i class="fas fa-trash"></i>
+              Limpar
+            </button>
+          </div>
+
+          <div id="historico" class="flex flex-wrap gap-3 min-h-16">
+            <!-- Números sorteados aparecerão aqui -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 py-8 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <img
+                src="./assets/img/logo.png"
+                alt="Logo Prefeitura"
+                class="h-16 w-24 rounded-lg object-cover"
+              />
+              <div>
+                <h3 class="text-white font-bold text-lg">Prefeitura de João Lisboa</h3>
+                <p class="text-gray-500 text-xs">Estado do Maranhão</p>
+              </div>
+            </div>
+            <p class="text-gray-400 text-sm">
+              Sistema oficial de sorteio para a campanha Dia das Mães 2026.
+            </p>
+          </div>
+
+          <div>
+            <hSobre o Sorteio
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Regulamento</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Premiação</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Contato
+              <li>
+                <a href="#" class="hover:text-white transition">Suporte</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white font-semibold mb-4 flex items-center gap-2">
+              <i class="fas fa-lock"></i>
+              Segurança
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href="#" class="hover:text-white transition">Privacidade</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Termos de Uso</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Contato</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 pt-6">Prefeitura Municipal de João Lisboa - MA
+          <p class="text-center text-gray-400 text-sm">
+            <i class="fas fa-copyright"></i> 2026 - SidneyDev
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
